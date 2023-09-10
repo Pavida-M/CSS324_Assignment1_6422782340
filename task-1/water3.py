@@ -1,0 +1,34 @@
+def initial_state():
+    return (8, 0, 0)
+
+def is_goal(s):
+    if s == (4, 4, 0):
+        return True
+    else:
+        return False
+
+def successors(s):
+    x, y, z = s
+    list = []
+    if x > 0:
+        if y < 5:
+            cost = min(5-y, x)
+            list.append([(x-cost, y+cost, z),cost])
+        if z < 3:
+            cost = min(3-z, x)
+            list.append([(x-cost, y, z+cost),cost])
+    if y > 0:
+        if x < 8:
+            cost = min(8-x, y)
+            list.append([(x+cost, y-cost, z),cost])
+        if z < 3:
+            cost = min(3-z, y)
+            list.append([(x, y-cost, z+cost),cost])
+    if z > 0:
+        if x < 8:
+            cost = min(8-x, z)
+            list.append([(x+cost, y, z-cost),cost])
+        if y < 5:
+            cost = min(5-y, z)
+            list.append([(x, y+cost, z-cost),cost])
+    return list
